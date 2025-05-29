@@ -1,54 +1,83 @@
-# React + TypeScript + Vite
+# Реализация с использованием React Query
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Почему React Query?
 
-Currently, two official plugins are available:
+Мы выбрали React Query (TanStack Query) для управления данными и состоянием по следующим причинам:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 1. Управление состоянием сервера
 
-## Expanding the ESLint configuration
+- React Query специально разработан для работы с серверным состоянием, которое отличается от клиентского
+- Предоставляет автоматическое фоновое обновление, кэширование и синхронизацию данных с сервером
+- Готовые решения для сложных сценариев: пагинация, бесконечная прокрутка и обновления в реальном времени
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 2. Оптимизация производительности
 
-```js
-export default tseslint.config({
-    extends: [
-        // Remove ...tseslint.configs.recommended and replace with this
-        ...tseslint.configs.recommendedTypeChecked,
-        // Alternatively, use this for stricter rules
-        ...tseslint.configs.strictTypeChecked,
-        // Optionally, add this for stylistic rules
-        ...tseslint.configs.stylisticTypeChecked,
-    ],
-    languageOptions: {
-        // other options...
-        parserOptions: {
-            project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-            tsconfigRootDir: import.meta.dirname,
-        },
-    },
-})
+- Встроенный механизм кэширования уменьшает количество ненужных сетевых запросов
+- Автоматическое фоновое обновление поддерживает данные актуальными без ручного вмешательства
+- Гибкие стратегии обновления данных, которые можно настраивать под различные сценарии
+
+### 3. Удобство разработки
+
+- Уменьшает количество шаблонного кода по сравнению с традиционными подходами к получению данных
+- Предоставляет мощные инструменты разработчика для отладки и мониторинга
+- Встроенная поддержка TypeScript
+- Готовые решения для обработки ошибок и состояний загрузки
+
+### 4. Ключевые функции, которые мы используем
+
+- Автоматические повторные попытки при ошибках
+- Инвалидация и обновление кэша
+- Оптимистичные обновления для лучшего UX
+- Параллельные запросы
+- Зависимые запросы
+- Бесконечные запросы для пагинации
+
+### 5. Преимущества интеграции
+
+- Бесшовная работа с существующими React-компонентами
+- Легкая интеграция с Material-UI для состояний загрузки и обработки ошибок
+- Совместимость с нашей TypeScript-конфигурацией
+- Минимальная необходимая настройка
+
+### 6. Поддержка и масштабируемость
+
+- Уменьшает сложность управления серверным состоянием
+- Упрощает работу со сложными требованиями к данным
+- Обеспечивает единый паттерн получения данных во всем приложении
+- Простота поддержки и масштабирования по мере роста приложения
+
+## Запуск проекта
+
+Для запуска проекта необходимо выполнить следующие команды:
+
+1. Установите зависимости:
+
+```bash
+yarn install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. Запустите API сервер (в отдельном терминале):
 
-```js
-// eslint.config.js
-import reactX from "eslint-plugin-react-x"
-import reactDom from "eslint-plugin-react-dom"
-
-export default tseslint.config({
-    plugins: {
-        // Add the react-x and react-dom plugins
-        "react-x": reactX,
-        "react-dom": reactDom,
-    },
-    rules: {
-        // other rules...
-        // Enable its recommended typescript rules
-        ...reactX.configs["recommended-typescript"].rules,
-        ...reactDom.configs.recommended.rules,
-    },
-})
+```bash
+yarn api
 ```
+
+3. Запустите приложение:
+
+```bash
+yarn dev
+```
+
+Приложение будет доступно по адресу: http://localhost:5173
+API сервер будет доступен по адресу: http://localhost:3001
+
+## Доступные скрипты
+
+- `yarn dev` - Запуск сервера разработки
+- `yarn build` - Сборка для продакшена
+- `yarn preview` - Предпросмотр собранного проекта
+- `yarn lint` - Запуск ESLint
+- `yarn api` - Запуск API сервера (json-server)
+- `yarn test` - Запуск тестов
+- `yarn test:watch` - Запуск тестов в режиме наблюдения
+- `yarn test:coverage` - Запуск тестов с отчетом о покрытии
